@@ -1,0 +1,20 @@
+{
+  "name": "i-almendros",
+  "version": "1.0.0",
+  "description": "Aplicacion web pseudo-mobile",
+  "homepage": "https://github.com/Renato776/i-almendros#readme",
+  "bugs": {
+    "url": "https://github.com/Renato776/i-almendros/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Renato776/i-almendros.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run dev"
+  }
+}
