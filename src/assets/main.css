@@ -4,6 +4,10 @@
 }
 body {
   background-color: var(--almendros-out-of-margin-color);
+  font-family: Montserrat, SansSerif, monospace;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 #abcdefghi__lmnopqrstuvwxyz {
   width: 100%;
@@ -18,4 +22,8 @@ body {
   justify-content: center;
   padding-left: 1em;
   padding-right: 1em;
+}
+
+#abcdefghi__lmnopqrstuvwxyz div {
+  background: var(--almendros-main-background);
 }

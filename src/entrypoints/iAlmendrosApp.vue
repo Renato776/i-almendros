@@ -12,11 +12,9 @@ onUnmounted(()=>{
 </script>
 <template>
   <div class="w-full">
-    <div class="form-title-splitter" style="display: flex; gap: 15px; align-items: center;">
-      <p>
-        Hello, World!
-      </p>
-    </div>
+    <p>
+      Hello, World!
+    </p>
   </div>
 </template>
 <style scoped>
