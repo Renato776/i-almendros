@@ -1,6 +1,18 @@
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+
 :root {
   --almendros-out-of-margin-color: black;
   --almendros-main-background: white;
+  --almendros-primary: blue;
+  --almendros-header-fg: white;
+  --almendros-fg: #111827;
+}
+
+@theme {
+  --color-primary: var(--almendros-primary);
+  --color-header-fg: var(--almendros-header-fg);
+  --color-surface: var(--almendros-main-background);
 }
 body {
   background-color: var(--almendros-out-of-margin-color);
@@ -14,16 +26,22 @@ body {
   max-width: 500px;
   overflow-x: hidden;
   margin: 0 auto;
+  padding: 0;
   min-height: 100vh;
   background: var(--almendros-main-background);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-left: 1em;
-  padding-right: 1em;
 }
 
 #abcdefghi__lmnopqrstuvwxyz div {
   background: var(--almendros-main-background);
+}
+
+
+@supports (padding: max(0px)) {
+  header {
+    padding-top: max(env(safe-area-inset-top), 0px);
+  }
 }
