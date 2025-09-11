@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import { onMounted, onUnmounted, ref } from 'vue'
+import TTLockReferences from "@/components/TTLockReferences.vue";
 onMounted(()=>{
   console.log('Hello, world!')
 })
@@ -13,6 +14,7 @@ onUnmounted(()=>{
 
 <template>
   <div class="min-h-screen w-full flex flex-col bg-surface text-[var(--almendros-fg,#111827)]">
+    <TTLockReferences />
     <!-- Header -->
     <header class="h-14 flex items-center gap-3 px-4 bg-primary text-header-fg">
       <button

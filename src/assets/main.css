@@ -4,7 +4,7 @@
 :root {
   --almendros-out-of-margin-color: black;
   --almendros-main-background: white;
-  --almendros-primary: blue;
+  --almendros-primary: #3478f5;
   --almendros-header-fg: white;
   --almendros-fg: #111827;
 }
@@ -15,6 +15,7 @@
   --color-surface: var(--almendros-main-background);
 }
 body {
+  position: relative;
   background-color: var(--almendros-out-of-margin-color);
   font-family: Montserrat, SansSerif, monospace;
   margin: 0;
@@ -39,9 +40,40 @@ body {
   background: var(--almendros-main-background);
 }
 
+#ttlock_dev_references {
+  display: none;
+}
+@media (min-width: 1200px) {
+  body {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+  }
+  #abcdefghi__lmnopqrstuvwxyz {
+    margin: unset;
+  }
+  #ttlock_dev_references {
+    background: var(--almendros-main-background);
+    max-width: unset;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 500px;
+    padding-top: 2rem;
+    height: 100vh;
+    overflow-y: auto;
+  }
+}
 
 @supports (padding: max(0px)) {
   header {
     padding-top: max(env(safe-area-inset-top), 0px);
   }
+}
+.text-ellipsis-start {
+  direction: rtl;        /* read text right-to-left */
+  text-align: left;      /* but keep alignment normal */
+  unicode-bidi: plaintext;
 }
