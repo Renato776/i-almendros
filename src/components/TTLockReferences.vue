@@ -8,7 +8,7 @@ const backlogURL = ref<string>('https://docs.google.com/document/d/1MO9fH3sgq5sO
 
 <template>
   <section id="ttlock_dev_references">
-    <header class="bg-surface p-6">
+    <header class="bg-surface p-6" style="padding-left: 1em; padding-right: 1em">
       <h2 class="text-xl font-semibold text-primary text-center">
         Referencias a tomar en cuenta
       </h2>
@@ -23,9 +23,33 @@ const backlogURL = ref<string>('https://docs.google.com/document/d/1MO9fH3sgq5sO
             rel="noopener"
             class="underline text-primary"
         >abrir backlog</a>.
-        Para ver detalles sobre el API, consulta el README del repositorio.
+        Para ver detalles sobre el API, consulta el README del repositorio. <br/><br/>
+
+        El objetivo del proyecto es completar la totalidad de las <strong>{{references.length}} vistas</strong>
+        expuestas en este apartado.
       </p>
     </header>
+    <ol
+        id="backlog-index"
+        style="list-style-type: decimal"
+        class="w-3/4 mx-auto list-decimal-leading-zero"
+        role="list"
+    >
+      <li
+          v-for="ref in references"
+          :key="ref.getUrl"
+          role="listitem"
+          class="mb-2"
+      >
+        <a
+            class="underline hover:opacity-50 transition"
+            :href="'#' + ref.getId"
+        >
+          {{ ref.getCaption }}
+        </a>
+      </li>
+    </ol>
+
 
     <div
         class="mt-4 rounded-2xl border border-black/10 bg-surface p-4"
@@ -37,6 +61,7 @@ const backlogURL = ref<string>('https://docs.google.com/document/d/1MO9fH3sgq5sO
             :key="ref.getUrl"
             role="listitem"
             class="w-full"
+            :id="ref.getId"
         >
           <figcaption class="mt-2 text-center text-[var(--almendros-fg,#111827)]">
             <span class="inline-flex items-center gap-2 max-w-full">
@@ -47,9 +72,14 @@ const backlogURL = ref<string>('https://docs.google.com/document/d/1MO9fH3sgq5sO
               >
                 {{ ref.getCode }}
               </strong>
+              <a href="#backlog-index">
+                <strong>
+                  <i class="fa-solid fa-up-to-dotted-line"></i>
+                </strong>
+              </a>
             </span>
           </figcaption>
-          <a :href="ref.getLocalImplementationUrl" target="_blank" rel="noopener" class="block">
+          <a :href="ref.getLocalImplementationUrl" class="block">
             <img
                 :src="ref.getUrl"
                 class="w-full h-auto rounded-xl shadow-sm"
@@ -59,13 +89,17 @@ const backlogURL = ref<string>('https://docs.google.com/document/d/1MO9fH3sgq5sO
 
           <figcaption class="mt-2 text-center text-[var(--almendros-fg,#111827)]">
             <span class="inline-flex items-center gap-2 max-w-full">
-              <span
+              <strong
                   class="inline-block align-bottom max-w-full"
                   :title="ref.getCaption"
               >
                 {{ ref.getCaption }}
-              </span>
+              </strong>
+            </span> <br v-if="ref.hasComments" />
+            <span class="inline-flex items-baseline text-left text-sm gap-2 max-w-full">
+                {{ ref.getComments }}
             </span>
+
           </figcaption>
         </figure>
       </div>
