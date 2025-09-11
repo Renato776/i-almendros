@@ -16,7 +16,7 @@
   "main": "index.js",
   "scripts": {
     "preview": "vite preview",
-    "build": "vite build",
+    "build": "vite build --base=/assets/4b4a5c44fba7eef45183cebf423ab2a35eb963560bacbd31975f58e4/",
     "dev": "vite --host 127.0.0.1 --port 7117"
   },
   "dependencies": {

@@ -35,7 +35,7 @@ export default  class TTLockReference {
         this.project_relative_implementation_url = project_relative_implementation_url;
     }
     public static asFirstRevision(): Array<TTLockReference> {
-        return [
+        const buffer = [
             new TTLockReference(
                 'https://i-almendros.s3.us-east-2.amazonaws.com/i-almendros-_-main-_-backlog-references-_-whatsapp_image_2025-09-10_at_7_32_39_p-_-2z7k3g9.jpeg',
                 'Home',
@@ -127,6 +127,15 @@ export default  class TTLockReference {
                 '#'
             ).setComments('Ejemplo de un formulario genérico. Necesario para establecer datos del perfil i.e Nombre, apellido, dirección. La mayoría de estos campos estarán deshabilidados, como la dirección o el nombre, y se mostrarán de solo lectura. Algunos campos estarán disponibles, como el sobrenombre.'),
         ]
+        return buffer.map((ref, i) => ref.getOrder > 0 ? ref : ref.setOrder(i))
+    }
+    protected order: number = 0;
+    public setOrder(i: number): TTLockReference {
+        this.order = i;
+        return this;
+    }
+    public get getOrder(): number {
+        return this.order;
     }
     public get getId(): string {
         return this.getUrl.replace(/[^a-z]+/g, '_');

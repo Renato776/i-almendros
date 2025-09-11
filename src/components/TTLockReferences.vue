@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import TTLockReference from "@/models/TTLockReference.ts";
+import ReferenceDetails from "@/components/ReferenceDetails.vue";
 
 const references = ref<Array<TTLockReference>>(TTLockReference.asFirstRevision())
 const backlogURL = ref<string>('https://docs.google.com/document/d/1MO9fH3sgq5sOycdk4E-N0pFASFyL5QMhD4iE8QqZioo/edit?usp=sharing')
@@ -50,58 +51,16 @@ const backlogURL = ref<string>('https://docs.google.com/document/d/1MO9fH3sgq5sO
       </li>
     </ol>
 
-
     <div
         class="mt-4 rounded-2xl border border-black/10 bg-surface p-4"
         role="list"
     >
       <div class="flex flex-col gap-6">
-        <figure
-            v-for="(ref, i) in references"
-            :key="ref.getUrl"
-            role="listitem"
-            class="w-full"
-            :id="ref.getId"
-        >
-          <figcaption class="mt-2 text-center text-[var(--almendros-fg,#111827)]">
-            <span class="inline-flex items-center gap-2 max-w-full">
-              <a href="#backlog-index">
-                <span class="shrink-0 font-medium text-primary">#{{ i + 1 }}</span>&nbsp;
-                <strong
-                    class="inline-block align-bottom max-w-full"
-                    :title="ref.getCode"
-                >
-                  {{ ref.getCode }}
-                </strong>&nbsp;
-                  <strong>
-                    <i class="fa-solid fa-up-to-dotted-line"></i>
-                  </strong>
-              </a>
-            </span>
-          </figcaption>
-          <a :href="ref.getLocalImplementationUrl" class="block">
-            <img
-                :src="ref.getUrl"
-                class="w-full h-auto rounded-xl shadow-sm"
-                loading="lazy"
-            />
-          </a>
-
-          <figcaption class="mt-2 text-center text-[var(--almendros-fg,#111827)]">
-            <span class="inline-flex items-center gap-2 max-w-full">
-              <strong
-                  class="inline-block align-bottom max-w-full"
-                  :title="ref.getCaption"
-              >
-                {{ ref.getCaption }}
-              </strong>
-            </span> <br v-if="ref.hasComments" />
-            <span class="inline-flex items-baseline text-left text-sm gap-2 max-w-full">
-                {{ ref.getComments }}
-            </span>
-
-          </figcaption>
-        </figure>
+        <ReferenceDetails
+          v-for="(ref, i) in references"
+          :key="ref.getUrl"
+          :reference="ref"
+        />
       </div>
     </div>
   </section>
