@@ -65,17 +65,17 @@ const backlogURL = ref<string>('https://docs.google.com/document/d/1MO9fH3sgq5sO
         >
           <figcaption class="mt-2 text-center text-[var(--almendros-fg,#111827)]">
             <span class="inline-flex items-center gap-2 max-w-full">
-              <span class="shrink-0 font-medium text-primary">#{{ i + 1 }}</span>
-              <strong
-                  class="inline-block align-bottom max-w-full"
-                  :title="ref.getCode"
-              >
-                {{ ref.getCode }}
-              </strong>
               <a href="#backlog-index">
-                <strong>
-                  <i class="fa-solid fa-up-to-dotted-line"></i>
-                </strong>
+                <span class="shrink-0 font-medium text-primary">#{{ i + 1 }}</span>&nbsp;
+                <strong
+                    class="inline-block align-bottom max-w-full"
+                    :title="ref.getCode"
+                >
+                  {{ ref.getCode }}
+                </strong>&nbsp;
+                  <strong>
+                    <i class="fa-solid fa-up-to-dotted-line"></i>
+                  </strong>
               </a>
             </span>
           </figcaption>
