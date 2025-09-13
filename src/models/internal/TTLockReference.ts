@@ -8,6 +8,10 @@ export default  class TTLockReference {
     protected comments: string = '';
     protected functionalities: Array<BacklogFunctionality> = [];
 
+    public get getFunctionalities(): Array<BacklogFunctionality> {
+        return this.functionalities;
+    }
+
     public setComments(comments: string): TTLockReference {
         this.comments = comments;
         return this;

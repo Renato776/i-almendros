@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import type TTLockReference from "@/models/TTLockReference.ts";
+import FunctionalitiesRenderer from "@/components/FunctionalitiesRenderer.vue";
 const props = defineProps<{ reference: TTLockReference }>();
 </script>
 <template>
-  <figure
-      role="listitem"
-      class="w-full"
-      :id="reference.getId"
-  >
-    <figcaption class="mt-2 text-center text-[var(--almendros-fg,#111827)]">
+  <div>
+    <figure
+        role="listitem"
+        class="w-full"
+        :id="reference.getId"
+    >
+      <figcaption class="mt-2 text-center text-[var(--almendros-fg,#111827)]">
             <span class="inline-flex items-center gap-2 max-w-full">
               <a href="#backlog-index">
                 <span class="shrink-0 font-medium text-primary">#{{ reference.getOrder }}</span>&nbsp;
@@ -23,16 +25,16 @@ const props = defineProps<{ reference: TTLockReference }>();
                   </strong>
               </a>
             </span>
-    </figcaption>
-    <a :href="reference.getLocalImplementationUrl" class="block">
-      <img
-          :src="reference.getUrl"
-          class="w-full h-auto rounded-xl shadow-sm"
-          loading="lazy"
-      />
-    </a>
+      </figcaption>
+      <a :href="reference.getLocalImplementationUrl" class="block">
+        <img
+            :src="reference.getUrl"
+            class="w-full h-auto rounded-xl shadow-sm"
+            loading="lazy"
+        />
+      </a>
 
-    <figcaption class="mt-2 text-center text-[var(--almendros-fg,#111827)]">
+      <figcaption class="mt-2 text-center text-[var(--almendros-fg,#111827)]">
           <span class="inline-flex items-center gap-2 max-w-full">
             <strong
                 class="inline-block align-bottom max-w-full"
@@ -41,9 +43,11 @@ const props = defineProps<{ reference: TTLockReference }>();
               {{ reference.getCaption }}
             </strong>
             </span> <br v-if="reference.hasComments"/>
-      <span class="inline-flex items-baseline text-left text-sm gap-2 max-w-full">
+        <span class="inline-flex items-baseline text-left text-sm gap-2 max-w-full">
             {{ reference.getComments }}
       </span>
-    </figcaption>
-  </figure>
+      </figcaption>
+    </figure>
+    <FunctionalitiesRenderer :functionalities="reference.getFunctionalities" />
+  </div>
 </template>

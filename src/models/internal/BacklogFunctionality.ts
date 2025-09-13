@@ -12,20 +12,31 @@ export default class BacklogFunctionality {
     }
     public setDescription(description: string): BacklogFunctionality{
         this.description = description;
-        return this;
-    }
-    public getDescription(): string{
-        return this.description;
+        return this
     }
     public setName(name: string): BacklogFunctionality {
         this.name = name;
         return this;
     }
+    public get short_name(): string {
+        switch (this.code) {
+            case 'LINK':
+                return `${this.code}:${this.argument.getName()}`;
+            default:
+                return `${this.code}:${this.argument.code}`;
+        }
+    }
+    public get isLink(): boolean {
+        return this.code === 'LINK';
+    }
+    public get getHref(): string {
+        return this.argument.getReferenceUrl();
+    }
     public getName(): string {
         return this.name;
     }
-    public get short_name(): string {
-        return `${this.code}:${this.argument.code}`;
+    public getDescription(): string{
+        return this.description;
     }
     public static asDownloadImage(entity: BacklogEntity): BacklogFunctionality{
         const buffer = new BacklogFunctionality();
@@ -35,7 +46,7 @@ export default class BacklogFunctionality {
     }
     public static asGotoButton(screen: TTLockReference): BacklogFunctionality{
         const buffer = new BacklogFunctionality();
-        buffer.code = 'GOTO'
+        buffer.code = 'LINK'
         buffer.argument = BacklogEntity.asRedirect(screen);
         return buffer;
     }

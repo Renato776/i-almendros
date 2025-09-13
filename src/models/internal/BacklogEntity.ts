@@ -6,6 +6,10 @@ export default class BacklogEntity {
     protected description: string = ''; //A description about what it represents in real life, who designed it, etc.
     protected fields: Array<BacklogEntityField> = [];
 
+    public getFields(): Array<BacklogEntityField> {
+        return this.fields;
+    }
+
     public getCode(): string {
         return this.code;
     }
@@ -72,6 +76,16 @@ export default class BacklogEntity {
         buff.code = 'link';
         buff.name = ref.getCode;
         buff.description = `Botón para que el usuario pueda navegar a la pantalla indicada.`;
+        buff.fields = [
+            new BacklogEntityField('url')
+                .setDefault(ref.getId)
+        ];
         return buff;
+    }
+    public getReferenceUrl(): string {
+        if(this.code !== 'link') return '';
+        if(this.fields.length < 1) return '';
+        const field = this.fields[0];
+        return `#${field.default}`;
     }
 }
