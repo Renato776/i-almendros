@@ -1,3 +1,4 @@
+import BacklogFunctionality from "@/models/internal/BacklogFunctionality.ts";
 
 export default  class TTLockReference {
     protected img_url: string = '';
@@ -5,6 +6,8 @@ export default  class TTLockReference {
     protected code: string = '';
     protected project_relative_implementation_url: string = '';
     protected comments: string = '';
+    protected functionalities: Array<BacklogFunctionality> = [];
+
     public setComments(comments: string): TTLockReference {
         this.comments = comments;
         return this;
@@ -34,6 +37,34 @@ export default  class TTLockReference {
         this.code = code;
         this.project_relative_implementation_url = project_relative_implementation_url;
     }
+    public static asPasscodesHome(): TTLockReference {
+       return new TTLockReference(
+           'https://i-almendros.s3.us-east-2.amazonaws.com/i-almendros-_-main-_-backlog-references-_-whatsapp_image_2025-09-10_at_7_32_39_pm--_-384wluq.jpeg',
+           'Passcodes > Home',
+           'SCREEN-02-01',
+           '#'
+       );
+    }
+    public static asQRHome(): TTLockReference {
+        return new TTLockReference(
+            'https://i-almendros.s3.us-east-2.amazonaws.com/i-almendros-_-main-_-backlog-references-_-whatsapp_image_2025-09-10_at_9_45_33_p-_-58bz0nv.jpeg',
+            'QR Codes > Home',
+            'SCREEN-03-01',
+            '#'
+        );
+    }
+    public static asProfileSettings(): TTLockReference {
+        return new TTLockReference(
+            'https://i-almendros.s3.us-east-2.amazonaws.com/i-almendros-_-main-_-backlog-references-_-whatsapp_image_2025-09-10_at_7_32_38_pm--_-1wmqhkn.jpeg',
+            'Profile Settings',
+            'SCREEN-99',
+            '#'
+        ).setComments('Ejemplo de un formulario genérico. Necesario para establecer datos del perfil i.e Nombre, apellido, dirección. La mayoría de estos campos estarán deshabilidados, como la dirección o el nombre, y se mostrarán de solo lectura. Algunos campos estarán disponibles, como el sobrenombre.');
+    }
+    public addFunctionality(f: BacklogFunctionality): TTLockReference {
+        this.functionalities.push(f);
+        return this;
+    }
     public static asFirstRevision(): Array<TTLockReference> {
         const buffer = [
             new TTLockReference(
@@ -41,13 +72,11 @@ export default  class TTLockReference {
                 'Home',
                 'SCREEN-01',
                 '/'
-            ),
-            new TTLockReference(
-                'https://i-almendros.s3.us-east-2.amazonaws.com/i-almendros-_-main-_-backlog-references-_-whatsapp_image_2025-09-10_at_7_32_39_pm--_-384wluq.jpeg',
-                'Passcodes > Home',
-                'SCREEN-02-01',
-                '#'
-            ),
+            )
+                .addFunctionality(BacklogFunctionality.asGotoButton(this.asPasscodesHome()))
+                .addFunctionality(BacklogFunctionality.asGotoButton(this.asQRHome()))
+                .addFunctionality(BacklogFunctionality.asGotoButton(this.asProfileSettings())),
+            this.asPasscodesHome(),
             new TTLockReference(
                 'https://i-almendros.s3.us-east-2.amazonaws.com/i-almendros-_-main-_-backlog-references-_-whatsapp_image_2025-09-10_at_7_32_38_pm--_-xy4eiaq.jpeg',
                 'Passcodes > Home: Search',
@@ -78,12 +107,7 @@ export default  class TTLockReference {
                 'SCREEN-02-01-01',
                 '#'
             ),
-            new TTLockReference(
-                'https://i-almendros.s3.us-east-2.amazonaws.com/i-almendros-_-main-_-backlog-references-_-whatsapp_image_2025-09-10_at_9_45_33_p-_-58bz0nv.jpeg',
-                'QR Codes > Home',
-                'SCREEN-03-01',
-                '#'
-            ),
+            this.asQRHome(),
             new TTLockReference(
                 'https://i-almendros.s3.us-east-2.amazonaws.com/i-almendros-_-main-_-backlog-references-_-whatsapp_image_2025-09-10_at_9_45_34_p-_-1m7pfw2.jpeg',
                 'QR Codes > Home: Search',
@@ -120,12 +144,7 @@ export default  class TTLockReference {
                 'SCREEN-03-03-01',
                 '#'
             ).setComments('Esta pantalla se utiliza tanto al terminar el passcode, como al crear el QR. Pantalla de éxito que muestra los datos generados, ya sea el passcode, o la foto del QR generado.'),
-            new TTLockReference(
-                'https://i-almendros.s3.us-east-2.amazonaws.com/i-almendros-_-main-_-backlog-references-_-whatsapp_image_2025-09-10_at_7_32_38_pm--_-1wmqhkn.jpeg',
-                'Profile Settings',
-                'SCREEN-99',
-                '#'
-            ).setComments('Ejemplo de un formulario genérico. Necesario para establecer datos del perfil i.e Nombre, apellido, dirección. La mayoría de estos campos estarán deshabilidados, como la dirección o el nombre, y se mostrarán de solo lectura. Algunos campos estarán disponibles, como el sobrenombre.'),
+            this.asProfileSettings(),
         ]
         return buffer.map((ref, i) => ref.getOrder > 0 ? ref : ref.setOrder(i))
     }

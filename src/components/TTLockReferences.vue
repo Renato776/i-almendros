@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import TTLockReference from "@/models/TTLockReference.ts";
+import TTLockReference from "@/models/internal/TTLockReference.ts";
 import ReferenceDetails from "@/components/ReferenceDetails.vue";
 
 const references = ref<Array<TTLockReference>>(TTLockReference.asFirstRevision())
@@ -57,9 +57,9 @@ const backlogURL = ref<string>('https://docs.google.com/document/d/1MO9fH3sgq5sO
     >
       <div class="flex flex-col gap-6">
         <ReferenceDetails
-          v-for="(ref, i) in references"
-          :key="ref.getUrl"
-          :reference="ref"
+          v-for="r in references"
+          :key="r.getId"
+          :reference="r"
         />
       </div>
     </div>
