@@ -29,7 +29,6 @@ function fieldMeta(f: BacklogEntityField) {
 </script>
 
 <template>
-  <FunctionalityPrimaryIdentifyingChip :fn="fn" />
   <section
     class="mx-auto w-full max-w-[500px] space-y-3"
     role="list"
@@ -49,6 +48,7 @@ function fieldMeta(f: BacklogEntityField) {
       class="rounded-xl border border-black/5 bg-surface shadow-sm p-4"
     >
       <!-- Header: code chips & short name -->
+      <FunctionalityPrimaryIdentifyingChip :fn="fn" />
 
       <!-- Argument / Entity block -->
       <section class="mt-3">
