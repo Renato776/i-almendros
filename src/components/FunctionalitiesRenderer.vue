@@ -1,43 +1,19 @@
-<!-- BacklogFunctionalitiesList.vue -->
 <script setup lang="ts">
 import type BacklogFunctionality from "@/models/BacklogFunctionality"; // adjust path if needed
+import { entCode, entName, entDesc, entFields } from '@/utils/internalDocumentationUtilities';
 import type BacklogEntity from "@/models/BacklogEntity";
 import type BacklogEntityField from "@/models/BacklogEntityField";
+import FunctionalityPrimaryIdentifyingChip from "@/components/FunctionalityPrimaryIdentifyingChip.vue";
 
 const props = defineProps<{
   functionalities: Array<BacklogFunctionality>;
 }>();
-
-/** Safe helpers: tolerate classes with partial/missing getters */
-function safeCall<T>(fn: (() => T) | undefined, fallback: T): T {
-  try { return typeof fn === "function" ? fn() : fallback; } catch { return fallback; }
-}
 
 function getEntity(func: any): BacklogEntity | undefined {
   // try common patterns without assuming private/protected access at compile time
   if (typeof func?.getArgument === "function") return func.getArgument();
   if (func?.argument) return func.argument as BacklogEntity;
   return undefined;
-}
-
-function entCode(ent: any): string {
-  return safeCall<string>(ent?.getCode, ent?.code ?? "");
-}
-function entName(ent: any): string {
-  return safeCall<string>(ent?.getName, ent?.name ?? "");
-}
-function entDesc(ent: any): string {
-  return safeCall<string>(ent?.getDescription, ent?.description ?? "");
-}
-function entFields(ent: any): BacklogEntityField[] {
-  return safeCall<BacklogEntityField[]>(ent?.getFields, ent?.fields ?? []);
-}
-
-function fnName(fn: any): string {
-  return safeCall<string>(fn?.getName, fn?.name ?? "");
-}
-function fnDesc(fn: any): string {
-  return safeCall<string>(fn?.getDescription, fn?.description ?? "");
 }
 
 /** Nicely format a field’s meta line */
@@ -49,9 +25,11 @@ function fieldMeta(f: BacklogEntityField) {
   if (f.visible === false) bits.push("hidden");
   return bits.join(" · ");
 }
+
 </script>
 
 <template>
+  <FunctionalityPrimaryIdentifyingChip :fn="fn" />
   <section
     class="mx-auto w-full max-w-[500px] space-y-3"
     role="list"
@@ -71,41 +49,6 @@ function fieldMeta(f: BacklogEntityField) {
       class="rounded-xl border border-black/5 bg-surface shadow-sm p-4"
     >
       <!-- Header: code chips & short name -->
-      <header class="mb-2">
-        <div class="flex flex-wrap items-center gap-2">
-          <!-- short_name as primary chip -->
-          <a v-if="fn.isLink"
-             :href="fn.getHref"
-             class="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
-          >
-            <i class="fa-solid fa-link inline-block"></i>
-            {{ fn?.short_name || fnName(fn) }}
-          </a>
-          <span
-            v-else
-            class="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
-            :title="fn?.short_name || fnName(fn)"
-          >
-            <span class="inline-block h-2 w-2 rounded-full bg-primary/70"></span>
-            {{ fn?.short_name || fnName(fn) }}
-          </span>
-
-          <!-- name (secondary) -->
-          <span
-            v-if="fnName(fn)"
-            class="truncate text-xs font-medium text-header-fg"
-            :title="fnName(fn)"
-          >
-            {{ fnName(fn) }}
-          </span>
-        </div>
-
-        <!-- Description (pre/code for technical audience) -->
-        <pre
-          v-if="fnDesc(fn)"
-          class="mt-2 whitespace-pre-wrap break-words rounded-lg bg-black/[.04] p-3 text-[13px] leading-snug text-[var(--almendros-fg,#1f2937)]"
-        ><code>{{ fnDesc(fn) }}</code></pre>
-      </header>
 
       <!-- Argument / Entity block -->
       <section class="mt-3">

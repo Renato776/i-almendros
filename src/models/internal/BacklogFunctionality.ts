@@ -18,13 +18,23 @@ export default class BacklogFunctionality {
         this.name = name;
         return this;
     }
-    public get short_name(): string {
+    public get short_name_separator(): string {
+        return ':';
+    }
+    public get short_name_fragments(): string[] {
+        const parts: Array<string> = [];
         switch (this.code) {
             case 'LINK':
-                return `${this.code}:${this.argument.getName()}`;
+                parts.push(this.code, this.argument.getName());
+                break;
             default:
-                return `${this.code}:${this.argument.code}`;
+                parts.push(this.code, this.argument.getCode());
+                break;
         }
+        return parts;
+    }
+    public get short_name(): string {
+        return this.short_name_fragments.join(this.short_name_separator);
     }
     public get isLink(): boolean {
         return this.code === 'LINK';
