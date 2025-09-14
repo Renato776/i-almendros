@@ -109,7 +109,7 @@ function fieldMeta(f: BacklogEntityField) {
 
       <!-- Argument / Entity block -->
       <section class="mt-3">
-        <h4 class="mb-2 text-xs uppercase tracking-wide text-neutral-500">
+        <h4 v-if="!fn.isLink" class="mb-2 text-xs uppercase tracking-wide text-neutral-500">
           Argument
         </h4>
 
@@ -118,7 +118,7 @@ function fieldMeta(f: BacklogEntityField) {
           :class="{'opacity-70': !getEntity(fn)}"
         >
           <template v-if="getEntity(fn)">
-            <div class="mb-2 flex flex-wrap items-center gap-2">
+            <div v-if="!fn.isLink" class="mb-2 flex flex-wrap items-center gap-2">
               <span class="rounded-md bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary"
                     :title="entCode(getEntity(fn))">
                 {{ entCode(getEntity(fn)) || '—' }}
@@ -135,7 +135,7 @@ function fieldMeta(f: BacklogEntityField) {
             ><code>{{ entDesc(getEntity(fn)) }}</code></pre>
 
             <!-- Fields (collapsible for compactness) -->
-            <details class="mt-3 group">
+            <details v-if="!fn.isLink" class="mt-3 group">
               <summary
                 class="cursor-pointer select-none text-[13px] font-semibold text-primary outline-none"
               >
