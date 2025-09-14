@@ -75,7 +75,7 @@ export default class BacklogEntity {
         const buff = new BacklogEntity();
         buff.code = 'link';
         buff.name = ref.getCode;
-        buff.description = `Botón para que el usuario pueda navegar a la pantalla indicada.`;
+        buff.description = `Botón para que el usuario pueda navegar hacia la pantalla: <a class="underline" href="#${ref.getId}"><strong>${ref.getCaption}</strong></ac>`;
         buff.fields = [
             new BacklogEntityField('url')
                 .setDefault(ref.getId)

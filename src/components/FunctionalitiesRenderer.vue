@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type BacklogFunctionality from "@/models/BacklogFunctionality"; // adjust path if needed
-import {entCode, entName, entDesc, entFields, getEntity} from '@/utils/internalDocumentationUtilities';
-import type BacklogEntity from "@/models/BacklogEntity";
+import {getEntity} from '@/utils/internalDocumentationUtilities';
 import type BacklogEntityField from "@/models/BacklogEntityField";
 import FunctionalityPrimaryIdentifyingChip from "@/components/FunctionalityPrimaryIdentifyingChip.vue";
 import BasicFunctionalityDetails from "@/components/internal/BasicFunctionalityDetails.vue";

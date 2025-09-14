@@ -33,6 +33,17 @@ export default class BacklogFunctionality {
         }
         return parts;
     }
+    public get short_name_fragments_display(): string [] {
+        const res = this.short_name_fragments;
+        const solution: Array<string> = [];
+        for(let i = 0; i < res.length; i++) {
+            solution.push(res[i]);
+            if(i != res.length - 1) {
+                solution.push(this.short_name_separator);
+            }
+        }
+        return solution;
+    }
     public get short_name(): string {
         return this.short_name_fragments.join(this.short_name_separator);
     }

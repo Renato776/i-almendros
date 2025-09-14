@@ -47,6 +47,11 @@ const props = defineProps<{ reference: TTLockReference }>();
             {{ reference.getComments }}
       </span>
       </figcaption>
+      <figcaption class="text-center pb-2">
+        <span v-if="reference.getFunctionalities.length > 0">
+          Funcionalidades:
+        </span>
+      </figcaption>
     </figure>
     <FunctionalitiesRenderer :functionalities="reference.getFunctionalities" />
   </div>
