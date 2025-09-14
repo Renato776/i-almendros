@@ -42,6 +42,15 @@ export default class BacklogFunctionality {
     public get getHref(): string {
         return this.argument.getReferenceUrl();
     }
+    public get shouldDisplayDetailsLabel(): boolean {
+        return !this.isLink;
+    }
+    public get isBasic(): boolean {
+        return this.isLink;
+    }
+    public get detailsLabel(): string {
+        return 'Detalles';
+    }
     public getName(): string {
         return this.name;
     }

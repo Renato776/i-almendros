@@ -20,3 +20,9 @@ export function fnName(fn: any): string {
 export function fnDesc(fn: any): string {
     return safeCall<string>(fn?.getDescription, fn?.description ?? "");
 }
+export function getEntity(func: any): BacklogEntity | undefined {
+    // try common patterns without assuming private/protected access at compile time
+    if (typeof func?.getArgument === "function") return func.getArgument();
+    if (func?.argument) return func.argument as BacklogEntity;
+    return undefined;
+}
