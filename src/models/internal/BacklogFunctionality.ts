@@ -25,6 +25,7 @@ export default class BacklogFunctionality {
         const parts: Array<string> = [];
         switch (this.code) {
             case 'LINK':
+            case 'DESIGN':
                 parts.push(this.code, this.argument.getName());
                 break;
             default:
@@ -50,14 +51,18 @@ export default class BacklogFunctionality {
     public get isLink(): boolean {
         return this.code === 'LINK';
     }
+    public get isDesign(): boolean {
+        return this.code === 'DESIGN';
+    }
     public get getHref(): string {
+        if(this.isDesign) return 'javascript:void(0)';
         return this.argument.getReferenceUrl();
     }
     public get shouldDisplayDetailsLabel(): boolean {
-        return !this.isLink;
+        return !(this.isLink || this.isDesign);
     }
     public get isBasic(): boolean {
-        return this.isLink;
+        return this.isLink || this.isDesign;
     }
     public get detailsLabel(): string {
         return 'Detalles';
@@ -72,6 +77,12 @@ export default class BacklogFunctionality {
         const buffer = new BacklogFunctionality();
         buffer.code = 'DWNL' //DownLoaD
         buffer.argument = entity;
+        return buffer;
+    }
+    public static asDesign(screen: TTLockReference, comment: string): BacklogFunctionality {
+        const buffer = new BacklogFunctionality();
+        buffer.code = 'DESIGN'
+        buffer.argument = BacklogEntity.asDesign(screen, comment);
         return buffer;
     }
     public static asGotoButton(screen: TTLockReference): BacklogFunctionality{

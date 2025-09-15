@@ -1,4 +1,5 @@
 import BacklogEntityField from "@/models/internal/BacklogEntityField.ts";
+import type TTLockReference from "@/models/internal/TTLockReference.ts";
 
 export default class BacklogEntity {
     protected code: string = ''; //The snake-case name of the entity
@@ -71,6 +72,14 @@ export default class BacklogEntity {
         return buffer;
     }
 
+    public static asDesign(ref: TTLockReference, comment: string): BacklogEntity {
+        const buff = new BacklogEntity();
+        buff.code = 'design';
+        buff.name = ref.getCode;
+        buff.description = comment;
+        buff.fields = [];
+        return buff;
+    }
     public static asRedirect(ref: TTLockReference): BacklogEntity {
         const buff = new BacklogEntity();
         buff.code = 'link';

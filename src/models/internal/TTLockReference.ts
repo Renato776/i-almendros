@@ -70,16 +70,18 @@ export default  class TTLockReference {
         return this;
     }
     public static asFirstRevision(): Array<TTLockReference> {
+        const homeScreen = new TTLockReference(
+            'https://i-almendros.s3.us-east-2.amazonaws.com/i-almendros-_-main-_-backlog-references-_-whatsapp_image_2025-09-10_at_7_32_39_p-_-2z7k3g9.jpeg',
+            'Home',
+            'SCREEN-01',
+            '/'
+        );
         const buffer = [
-            new TTLockReference(
-                'https://i-almendros.s3.us-east-2.amazonaws.com/i-almendros-_-main-_-backlog-references-_-whatsapp_image_2025-09-10_at_7_32_39_p-_-2z7k3g9.jpeg',
-                'Home',
-                'SCREEN-01',
-                '/'
-            )
+            homeScreen
                 .addFunctionality(BacklogFunctionality.asGotoButton(this.asPasscodesHome()))
                 .addFunctionality(BacklogFunctionality.asGotoButton(this.asQRHome()))
-                .addFunctionality(BacklogFunctionality.asGotoButton(this.asProfileSettings())),
+                .addFunctionality(BacklogFunctionality.asGotoButton(this.asProfileSettings()))
+                .addFunctionality(BacklogFunctionality.asDesign(homeScreen, `La vista quedaría muy vacía solo con tres botones. Agregar también el nombre de la app, y algún design chido para llenar el resto del espacio. Puedes agregar tal vez descripciones de cada opción o algo para terminar de completar la pantalla, y no solo dejar los tres botones sueltos `)),
             this.asPasscodesHome(),
             new TTLockReference(
                 'https://i-almendros.s3.us-east-2.amazonaws.com/i-almendros-_-main-_-backlog-references-_-whatsapp_image_2025-09-10_at_7_32_38_pm--_-xy4eiaq.jpeg',

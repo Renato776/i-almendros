@@ -9,7 +9,7 @@ const props = defineProps<{
 </script>
 <template>
   <header>
-    <LinkFunctionalityHeader :fn="fn" v-if="fn.isLink" />
+    <LinkFunctionalityHeader :fn="fn" v-if="fn.isBasic" />
     <GenericFunctionalityHeader :fn="fn" v-else />
   </header>
 </template>
