@@ -19,22 +19,21 @@ function displayFunctionalities() {
   // Coordinates relative to the viewport (used by position: fixed)
   const fixedRelative = {
     top: Math.round(rect.top),
-    left: Math.round(rect.left),
+    left: Math.round(rect.left) - 400 - 35,
   };
-
-  // Absolute page coordinates (viewport + scroll)
-  const pageAbsolute = {
-    top: Math.round(rect.top + window.scrollY),
-    left: Math.round(rect.left + window.scrollX),
-  };
-
+  const root = document.getElementById("abcdefghi__lmnopqrstuvwxyz") || window;
+  root.dispatchEvent(new CustomEvent('display-experimental-log', {detail:{
+      functionalities: props.reference.getFunctionalities,
+      screen_name: props.reference.getCaption,
+      X: fixedRelative.left,
+      Y: fixedRelative.top,
+    }}))
   console.log("[TTLockReference] viewport (position:fixed) coords:", fixedRelative);
-  console.log("[TTLockReference] page absolute coords:", pageAbsolute);
 }
 </script>
 
 <template>
-  <div class="relative">
+  <div>
     <figure
         ref="figureEl"
         role="listitem"
@@ -83,9 +82,7 @@ function displayFunctionalities() {
 
       <figcaption @click="displayFunctionalities()" class="text-center pb-2 cursor-pointer">
         <span v-if="reference.getFunctionalities.length > 0">
-          Ver {{ reference.getFunctionalities.length }} Funcionalidades
-          <small class="text-[blue]">●</small>
-          <i class="fa-solid fa-function"></i>
+          Ver {{ reference.getFunctionalities.length }} Funcionalidades <small class="text-[blue]">●</small> <i class="fa-solid fa-function"></i>
         </span>
       </figcaption>
     </figure>

@@ -32,7 +32,7 @@ const props = defineProps<{
       class="rounded-xl border border-black/5 bg-surface shadow-sm p-4"
     >
       <!-- Header: code chips & short name -->
-      <FunctionalityPrimaryIdentifyingChip :fn="fn" />
+      <FunctionalityPrimaryIdentifyingChip :fn="fn" :index="i+1" />
       <BasicFunctionalityDetails :entity="getEntity(fn)" v-if="fn.isBasic" />
       <FunctionalityDetailsComponent :fn="fn" v-else />
     </article>
