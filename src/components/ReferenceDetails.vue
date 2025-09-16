@@ -25,10 +25,10 @@ function displayFunctionalities() {
   root.dispatchEvent(new CustomEvent('display-experimental-log', {detail:{
       functionalities: props.reference.getFunctionalities,
       screen_name: props.reference.getCaption,
+      screen_code: props.reference.getCode,
       X: fixedRelative.left,
       Y: fixedRelative.top,
     }}))
-  console.log("[TTLockReference] viewport (position:fixed) coords:", fixedRelative);
 }
 </script>
 

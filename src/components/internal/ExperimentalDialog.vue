@@ -9,6 +9,7 @@ const leftPx = ref<number>(0);
 const boxRef = ref<HTMLElement | null>(null);
 const functionalities = ref<Array<BacklogFunctionality>>([]);
 const screenName = ref<string>('');
+const screenCode = ref<string>('');
 
 const OFFSCREEN_TOP = -10000;
 
@@ -20,7 +21,6 @@ function hide() {
   // after transition completes, park offscreen again
   window.setTimeout(() => {
     topPx.value = OFFSCREEN_TOP;
-    console.log("[ExperimentalDialog] hidden");
   }, 320); // match CSS transition duration
 }
 
@@ -36,7 +36,6 @@ function showAt(x: number, y: number) {
   topPx.value  = clamp(Math.round(y), 8, maxTop);
 
   visible.value = true;
-  console.log("[ExperimentalDialog] shown at", { left: leftPx.value, top: topPx.value });
 }
 
 onMounted(() => {
@@ -50,6 +49,7 @@ onMounted(() => {
       functionalities.value = d.functionalities;
     }
     screenName.value = d.screen_name || '';
+    screenCode.value = d.screen_code || '';
     // accept X/Y or x/y; default to 16px if missing
     const X = Number.isFinite(+d.X) ? +d.X : (Number.isFinite(+d.x) ? +d.x : 16);
     const Y = Number.isFinite(+d.Y) ? +d.Y : (Number.isFinite(+d.y) ? +d.y : 16);
@@ -87,7 +87,7 @@ onMounted(() => {
     <h3 class="text-sm sm:text-base font-semibold leading-tight text-neutral-800 dark:text-neutral-100">
       {{ functionalities.length }} funcionalidades de:
       <br />
-      <span class="font-medium text-primary">{{ screenName }}</span>
+      <span class="font-medium text-primary">{{ screenName }}</span> <small class="text-gray-500">({{screenCode}})</small>
     </h3>
 
     <div class="my-3 border-t border-neutral-200/70 dark:border-neutral-700/60"></div>
