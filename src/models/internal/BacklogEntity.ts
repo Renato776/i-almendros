@@ -80,11 +80,16 @@ export default class BacklogEntity {
         buff.fields = [];
         return buff;
     }
-    public static asRedirect(ref: TTLockReference): BacklogEntity {
+    public static asRedirect(ref: TTLockReference, caller?: TTLockReference = undefined): BacklogEntity {
         const buff = new BacklogEntity();
         buff.code = 'link';
         buff.name = ref.getCode;
-        buff.description = `Botón para que el usuario pueda navegar hacia la pantalla: <a class="underline" href="#${ref.getId}"><strong>${ref.getCaption}</strong></ac>`;
+        if(caller && caller?.getCode?.toUpperCase() === 'BACK')
+        {
+            buff.description = `Botón para regresar a: <a class="underline" href="#${ref.getId}"><strong>${ref.getCaption}</strong></a>. <br/> Generalmente ubicado en el header`;
+        } else {
+            buff.description = `Botón para que el usuario pueda navegar hacia la pantalla: <a class="underline" href="#${ref.getId}"><strong>${ref.getCaption}</strong></ac>`;
+        }
         buff.fields = [
             new BacklogEntityField('url')
                 .setDefault(ref.getId)
