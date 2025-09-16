@@ -49,9 +49,11 @@ export default  class TTLockReference {
            'SCREEN-02-01',
            '#'
        ).addFunctionality(BacklogFunctionality.asBackArrow(this.asMainHomeShallow()))
-           .addFunctionality(BacklogFunctionality.asListDisplay(
-               BacklogEntity.asVisitSchema()
-           )).addFunctionality(BacklogFunctionality.asListDisplay(BacklogEntity.asVisitorSchema()));
+           .addFunctionality(BacklogFunctionality.asListDisplay(BacklogEntity.asVisitSchema()))
+           .addFunctionality(BacklogFunctionality.asSubListDisplay(BacklogEntity.asVisitorSchema()))
+           .addFunctionality(BacklogFunctionality.asGotoButton(this.asPasscodesSearch()))
+           .addFunctionality(BacklogFunctionality.asGotoButton(this.asPasscodesGenerationTimed()))
+           ;
     }
     public static asQRHome(): TTLockReference {
         return new TTLockReference(
@@ -68,6 +70,30 @@ export default  class TTLockReference {
             'SCREEN-01',
             '/'
         );
+    }
+    public static asPasscodesGenerationTimed(): TTLockReference {
+        return new TTLockReference(
+            'https://i-almendros.s3.us-east-2.amazonaws.com/i-almendros-_-main-_-backlog-references-_-whatsapp_image_2025-09-10_at_7_32_38_pm--_-2bqjlsu.jpeg',
+            'Passcodes > Home > Generate Timed Passcode',
+            'SCREEN-02-03',
+            '#'
+        );
+    }
+    public static asPasscodesGenerationOneTime(): TTLockReference {
+        return new TTLockReference(
+            'https://i-almendros.s3.us-east-2.amazonaws.com/i-almendros-_-main-_-backlog-references-_-whatsapp_image_2025-09-10_at_7_32_38_pm--_-34xxhpf.jpeg',
+            'Passcodes > Home > Generate One-Time Passcode',
+            'SCREEN-02-02',
+            '#'
+        )
+    }
+    public static asPasscodesSearch(): TTLockReference {
+        return new TTLockReference(
+            'https://i-almendros.s3.us-east-2.amazonaws.com/i-almendros-_-main-_-backlog-references-_-whatsapp_image_2025-09-10_at_7_32_38_pm--_-xy4eiaq.jpeg',
+            'Passcodes > Home: Search',
+            'SCREEN-02-01.01',
+            '#'
+        )
     }
     public static asMainHome(): TTLockReference {
         const homeScreen = this.asMainHomeShallow()
@@ -94,24 +120,9 @@ export default  class TTLockReference {
         const buffer = [
             this.asMainHome(),
             this.asPasscodesHome(),
-            new TTLockReference(
-                'https://i-almendros.s3.us-east-2.amazonaws.com/i-almendros-_-main-_-backlog-references-_-whatsapp_image_2025-09-10_at_7_32_38_pm--_-xy4eiaq.jpeg',
-                'Passcodes > Home: Search',
-                'SCREEN-02-01.01',
-                '#'
-            ),
-            new TTLockReference(
-                'https://i-almendros.s3.us-east-2.amazonaws.com/i-almendros-_-main-_-backlog-references-_-whatsapp_image_2025-09-10_at_7_32_38_pm--_-34xxhpf.jpeg',
-                'Passcodes > Home > Generate One-Time Passcode',
-                'SCREEN-02-02',
-                '#'
-            ),
-            new TTLockReference(
-                'https://i-almendros.s3.us-east-2.amazonaws.com/i-almendros-_-main-_-backlog-references-_-whatsapp_image_2025-09-10_at_7_32_38_pm--_-2bqjlsu.jpeg',
-                'Passcodes > Home > Generate Timed Passcode',
-                'SCREEN-02-03',
-                '#'
-            ),
+            this.asPasscodesSearch(),
+            this.asPasscodesGenerationTimed(),
+            this.asPasscodesGenerationOneTime(),
             new TTLockReference(
                 'https://i-almendros.s3.us-east-2.amazonaws.com/i-almendros-_-main-_-backlog-references-_-whatsapp_image_2025-09-10_at_7_32_38_p-_-2v3vi4m.jpeg',
                 'Passcodes > Home > Generate Recurring Passcode',

@@ -81,6 +81,19 @@ export default class BacklogFunctionality {
     public getDescription(): string{
         return this.description;
     }
+    public get isSublist(): boolean {
+        return this.code === 'SUBLIST';
+    }
+    public get isList(): boolean {
+        return this.code === 'LIST';
+    }
+    public static asSubListDisplay(entity: BacklogEntity): BacklogFunctionality {
+        const buffer = new BacklogFunctionality();
+        buffer.code = 'SUBLIST'
+        buffer.argument = entity;
+        return buffer;
+    }
+
     public static asListDisplay(entity: BacklogEntity): BacklogFunctionality{
         const buffer = new BacklogFunctionality();
         buffer.code = 'LIST' //DownLoaD

@@ -9,7 +9,8 @@ const props = defineProps<{
 <template>
   <div class="flex flex-wrap items-center gap-2">
     <label class="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary" >
-      <i class="fa-solid fa-table-list inline-block"></i>
+      <i v-if="fn.isList" class="fa-solid fa-table inline-block"></i>
+      <i v-if="fn.isSublist" class="fa-solid fa-table-list inline-block"></i>
       <span v-for="fragment in fn.short_name_fragments_display" :class="{'text-[black]': fragment === ':', 'font-bold': fragment === ':'}" >
         {{ fragment }}
       </span>
