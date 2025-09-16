@@ -1,4 +1,5 @@
 import BacklogFunctionality from "@/models/internal/BacklogFunctionality.ts";
+import BacklogEntity from "@/models/internal/BacklogEntity.ts";
 
 export default  class TTLockReference {
     protected img_url: string = '';
@@ -47,7 +48,10 @@ export default  class TTLockReference {
            'Passcodes > Home',
            'SCREEN-02-01',
            '#'
-       ).addFunctionality(BacklogFunctionality.asBackArrow(this.asMainHomeShallow()));
+       ).addFunctionality(BacklogFunctionality.asBackArrow(this.asMainHomeShallow()))
+           .addFunctionality(BacklogFunctionality.asListDisplay(
+               BacklogEntity.asVisitSchema()
+           )).addFunctionality(BacklogFunctionality.asListDisplay(BacklogEntity.asVisitorSchema()));
     }
     public static asQRHome(): TTLockReference {
         return new TTLockReference(

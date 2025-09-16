@@ -40,11 +40,8 @@ export default class BacklogEntity {
        const buffer = new BacklogEntity();
        buffer.code = 'visitor';
        buffer.name = 'Visitante';
-       buffer.description = `Formulario que se requiere llenar sobre la persona que visita al usuario. 
-       En esta versión no existe lista de contactos, por lo que los datos deberán ser establecidos 
-       cada vez que se desee generar un QR, aún si la misma persona ya ha visitado con anterioridad.
-        Notar que los datos de la visita se refieren a la persona, no a la actividad, por lo que hora de llegada, o razón de la visita no van en este esquema.`;
-        buffer.fields = [
+       buffer.description = `Formulario que se requiere llenar sobre la persona que visita al usuario. En esta versión no existe lista de contactos, por lo que los datos deberán ser establecidos cada vez que se desee generar un QR, aún si la misma persona ya ha visitado con anterioridad. Notar que los datos de la visita se refieren a la persona, no a la actividad, por lo que hora de llegada, o razón de la visita no van en este esquema.`;
+       buffer.fields = [
             new BacklogEntityField('Nombre completo').setRequired(true),
             new BacklogEntityField('Teléfono').setRequired(true).setSize(50),
             new BacklogEntityField(`DPI`).setRequired(true).setSize(15),
@@ -55,10 +52,9 @@ export default class BacklogEntity {
         const buffer = new BacklogEntity();
         buffer.code = 'visit';
         buffer.name = 'Visita';
-        buffer.description = `Formulario que obtiene información de la visita en sí, un visitante puede tener múltiples visitas. Una visita no puede existir sin visitante.
-        Algunos de los campos aplican según el tipo de visita que se generó (QR, Passcode, etc) y el subtipo (One-Time, Recurrent, etc).`;
+        buffer.description = `Formulario que obtiene información de la visita en sí, un visitante puede tener múltiples visitas. Una visita no puede existir sin visitante. Algunos de los campos aplican según el tipo de visita que se generó (QR, Passcode, etc) y el subtipo (One-Time, Recurrent, etc).`;
         buffer.fields = [
-            new BacklogEntityField('Visitante').setRequired(true).reference(
+            new BacklogEntityField('Visitante').setRequired(true).references(
                 this.asVisitorSchema()
             ),
             new BacklogEntityField('fecha_y_hora_inicio').setType('date').setRequired(true).setDefault('now'),
@@ -86,7 +82,7 @@ export default class BacklogEntity {
         buff.name = ref.getCode;
         if(caller && caller?.getCode?.toUpperCase() === 'BACK')
         {
-            buff.description = `Botón para regresar a: <a class="underline" href="#${ref.getId}"><strong>${ref.getCaption}</strong></a>. <br/> Generalmente ubicado en el header`;
+            buff.description = `Botón para regresar a: <a class="underline" href="#${ref.getId}"><strong>${ref.getCaption}</strong></a>.<br/> Generalmente ubicado en el header`;
         } else {
             buff.description = `Botón para que el usuario pueda navegar hacia la pantalla: <a class="underline" href="#${ref.getId}"><strong>${ref.getCaption}</strong></ac>`;
         }

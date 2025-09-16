@@ -8,17 +8,12 @@ const props = defineProps<{
 </script>
 <template>
   <div class="flex flex-wrap items-center gap-2">
-    <!-- name (secondary) -->
-    <span v-if="fnName(fn)" class="truncate text-xs font-medium text-header-fg" :title="fnName(fn)">
-      {{ fnName(fn) }}
-    </span>
-    <span
-        class="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
-        :title="fn?.short_name || fnName(fn)"
-    >
-      <span class="inline-block h-2 w-2 rounded-full bg-primary/70"></span>
-        {{ fn?.short_name || fnName(fn) }}
+    <label class="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary" >
+      <i class="fa-solid fa-table-list inline-block"></i>
+      <span v-for="fragment in fn.short_name_fragments_display" :class="{'text-[black]': fragment === ':', 'font-bold': fragment === ':'}" >
+        {{ fragment }}
       </span>
+    </label>
   </div>
   <!-- Description (pre/code for technical audience) -->
   <pre v-if="fnDesc(fn)"

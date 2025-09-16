@@ -11,16 +11,6 @@ const props = defineProps<{
 }>();
 
 
-/** Nicely format a field’s meta line */
-function fieldMeta(f: BacklogEntityField) {
-  const bits: string[] = [];
-  if (f.type) bits.push(f.type);
-  if (typeof f.size === "number") bits.push(`${f.size}`);
-  bits.push(f.required ? "required" : "optional");
-  if (f.visible === false) bits.push("hidden");
-  return bits.join(" · ");
-}
-
 </script>
 
 <template>

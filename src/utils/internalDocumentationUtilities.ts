@@ -26,3 +26,12 @@ export function getEntity(func: any): BacklogEntity | undefined {
     if (func?.argument) return func.argument as BacklogEntity;
     return undefined;
 }
+export function fieldMeta(f: BacklogEntityField) {
+    const bits: string[] = [];
+    if (f.type) bits.push(f.type);
+    if (typeof f.size === "number") bits.push(`${f.size}`);
+    bits.push(f.required ? "required" : "optional");
+    if (f.visible === false) bits.push("hidden");
+    return bits.join(" · ");
+}
+

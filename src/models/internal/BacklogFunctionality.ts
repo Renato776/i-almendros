@@ -10,6 +10,9 @@ export default class BacklogFunctionality {
     public constructor(){
        this.argument = new BacklogEntity();
     }
+    public getArgument(): BacklogEntity {
+        return this.argument;
+    }
     public setDescription(description: string): BacklogFunctionality{
         this.description = description;
         return this
@@ -27,11 +30,12 @@ export default class BacklogFunctionality {
             case 'LINK':
             case 'DESIGN':
             case 'BACK':
+            default:
                 parts.push(this.code, this.argument.getName());
                 break;
-            default:
-                parts.push(this.code, this.argument.getCode());
-                break;
+            //default:
+            //    parts.push(this.code, this.argument.getCode());
+            //    break;
         }
         return parts;
     }
@@ -77,9 +81,15 @@ export default class BacklogFunctionality {
     public getDescription(): string{
         return this.description;
     }
+    public static asListDisplay(entity: BacklogEntity): BacklogFunctionality{
+        const buffer = new BacklogFunctionality();
+        buffer.code = 'LIST' //DownLoaD
+        buffer.argument = entity;
+        return buffer;
+    }
     public static asDownloadImage(entity: BacklogEntity): BacklogFunctionality{
         const buffer = new BacklogFunctionality();
-        buffer.code = 'DWNL' //DownLoaD
+        buffer.code = 'DOWNLOAD' //DownLoaD
         buffer.argument = entity;
         return buffer;
     }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {entCode, getEntity, entDesc, entFields, entName} from "@/utils/internalDocumentationUtilities.ts";
+import {entCode, fieldMeta, getEntity, entDesc, entFields, entName} from "@/utils/internalDocumentationUtilities.ts";
 
 const props = defineProps<{
   fn: BacklogFunctionality;
@@ -17,15 +17,11 @@ const props = defineProps<{
         :class="{'opacity-70': !getEntity(fn)}"
     >
       <template v-if="getEntity(fn)">
-        <div v-if="!fn.isLink" class="mb-2 flex flex-wrap items-center gap-2">
-              <span class="rounded-md bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary"
-                    :title="entCode(getEntity(fn))">
-                {{ entCode(getEntity(fn)) || '—' }}
-              </span>
-          <span class="text-[13px] font-medium text-header-fg truncate"
-                :title="entName(getEntity(fn))">
-                {{ entName(getEntity(fn)) || 'Unnamed entity' }}
-              </span>
+        <div class="mb-2 flex flex-wrap items-center gap-2">
+          <span class="rounded-md bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary"
+                :title="entCode(getEntity(fn))">
+            {{ entCode(getEntity(fn)) || '—' }}
+          </span> = <span class="text-[11px] font-medium" :title="entName(getEntity(fn))">{{fn.getArgument().getName()}}</span>
         </div>
 
         <pre
@@ -51,7 +47,7 @@ const props = defineProps<{
                 class="rounded-md border border-black/5 bg-white p-2"
             >
               <div class="flex items-baseline justify-between gap-2">
-                <code class="font-mono text-[12px] font-semibold text-header-fg"
+                <code class="font-mono text-[12px] font-semibold"
                       :title="field.name">
                   {{ field.name || 'unnamed_field' }}
                 </code>
