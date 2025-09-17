@@ -43,7 +43,7 @@ function displayFunctionalities() {
       <figcaption class="mt-2 text-center text-[var(--almendros-fg,#111827)]">
         <span class="inline-flex items-center gap-2 max-w-full">
           <a href="#backlog-index">
-            <span class="shrink-0 font-medium text-primary">#{{ reference.getOrder }}</span>&nbsp;
+            <span class="shrink-0 font-medium text-primary">#{{ reference.getOrder + 1}}</span>&nbsp;
             <strong
                 class="inline-block align-bottom max-w-full"
                 :title="reference.getCode"

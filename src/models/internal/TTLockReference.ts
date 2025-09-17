@@ -52,8 +52,7 @@ export default  class TTLockReference {
            .addFunctionality(BacklogFunctionality.asListDisplay(BacklogEntity.asVisitSchema()))
            .addFunctionality(BacklogFunctionality.asSubListDisplay(BacklogEntity.asVisitorSchema()))
            .addFunctionality(BacklogFunctionality.asGotoButton(this.asPasscodesSearch()))
-           .addFunctionality(BacklogFunctionality.asGotoButton(this.asPasscodesGenerationTimed()))
-           ;
+           .addFunctionality(BacklogFunctionality.asGotoButton(this.asPasscodesGenerationTimed()));
     }
     public static asQRHome(): TTLockReference {
         return new TTLockReference(
