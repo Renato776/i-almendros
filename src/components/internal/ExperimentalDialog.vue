@@ -84,10 +84,11 @@ onMounted(() => {
   ]"
       :style="{ top: `${topPx}px`, left: `${leftPx}px` }"
   >
-    <h3 class="text-sm sm:text-base font-semibold leading-tight text-neutral-800 dark:text-neutral-100">
+    <h3 @click="hide" class="text-sm cursor-pointer sm:text-base font-semibold leading-tight text-neutral-800 dark:text-neutral-100">
       {{ functionalities.length }} funcionalidades de:
       <br />
       <span class="font-medium text-primary">{{ screenName }}</span> <small class="text-gray-500">({{screenCode}})</small>
+      &nbsp;&nbsp;<i class="fa-solid fa-square-chevron-up"></i>
     </h3>
 
     <div class="my-3 border-t border-neutral-200/70 dark:border-neutral-700/60"></div>
