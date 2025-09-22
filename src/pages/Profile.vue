@@ -1,5 +1,22 @@
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+const router = useRouter()
+function goBack() {
+  router.back()
+}
+</script>
+
 <template>
   <div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-xl shadow">
+        <!-- Back Button -->
+    <button
+      @click="goBack"
+      class="mb-4 flex items-center text-primary font-semibold"
+      aria-label="Go back"
+    >
+      <i class="fa-solid fa-arrow-left mr-2"></i>
+      Back
+    </button>
     <h2 class="text-2xl font-bold mb-4">Profile Details</h2>
     <div class="mb-4">
       <label class="block font-semibold mb-1" for="name">Name</label>
