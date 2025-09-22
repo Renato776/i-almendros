@@ -4,4 +4,6 @@ import { createApp } from 'vue'
 
 import App from './entrypoints/iAlmendrosApp.vue';
 
-createApp(App).mount('#abcdefghi__lmnopqrstuvwxyz');
+import router from './router'
+
+createApp(App).use(router).mount('#abcdefghi__lmnopqrstuvwxyz');
